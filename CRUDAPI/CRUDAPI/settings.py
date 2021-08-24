@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+
+BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
+MEDIA_URL = '/Photos/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "Photos")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'Corsheaders',
+    'corsheaders',
     'EmployeeApp.apps.EmployeeappConfig',
 
 ]
@@ -82,8 +87,12 @@ WSGI_APPLICATION = 'CRUDAPI.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'CLIENT': {
+            "host":"mongodb+srv://SamiMezghani:sami1994@crudapi.8itma.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+            "name":"CRUDAPI",
+            'authMechanism':"SCRAM-SHA-1"
+        }
     }
 }
 
